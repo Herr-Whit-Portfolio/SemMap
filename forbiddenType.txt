@@ -1,0 +1,15 @@
+CC
+DT
+EX
+IN
+MD
+PDT
+PRP
+PRP$
+RP
+TO
+WDT
+WP
+WP$
+WRB
+ADV
