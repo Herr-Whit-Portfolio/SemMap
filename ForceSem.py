@@ -107,6 +107,7 @@ def main():
     lag = dt.timedelta(minutes=10)
     # Choose a function to modulate the distribution of the link strength.
     modulate = lambda x: math.sqrt(math.sqrt(x))
+    mode = 'public'
 
     print("Loading Language Processor...")
     #nltk.download('averaged_perceptron_tagger')
@@ -138,14 +139,14 @@ def main():
             found = False
             for node in nodes:
                 if node["id"] == word:
-                    node['group'] += 1
+                    node['count'] += 1
                     found = True
             if not found:
-                nodes.append({"id": word, "group": 1})
+                nodes.append({"id": word, "count": 1})
 
     toRemove = []
     for node in nodes:
-        if node["group"] < minCount:
+        if node["count"] < minCount:
             toRemove.append(node)
 
     '''
@@ -190,15 +191,22 @@ def main():
 
     # Print the edges and apply a function to modulate the distribution of weights in order to achieve the optimal
     # graph.
-    for node in nodes:
-        print(node)
-    for i, edge in enumerate(edges):
-        print(edge)
-        edges[i]["value"] = modulate(edges[i]["value"])
+    vocab = []
+    for i in range(len(nodes)):
+        vocab.append(nodes[i]['id'])
+        nodes[i]['id'] = vocab.index(nodes[i]['id'])
+    for i in range(len(edges)):
+        edges[i]['source'] = vocab.index(edges[i]['source'])
+        edges[i]['target'] = vocab.index(edges[i]['target'])
+        print(edges[i])
 
-    # Save the result in JSON and notify the user.
+
+    # Save the result in JSON
     with open("netOut.json", "w") as out:
-        json.dump({"nodes": nodes, "links": edges}, out)
+        if mode == 'public':
+            json.dump({"nodes": nodes, "edges": edges}, out)
+        elif mode == 'private':
+            json.dump({"nodes": nodes, "edges": edges, "vocab": vocab}, out)
 
 if __name__ == "__main__":
     main()
