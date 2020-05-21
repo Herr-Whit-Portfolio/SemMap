@@ -6,5 +6,5 @@ The process has two major stages:
 
 2. Visualize.py takes the graph representation and produces a 2d embedding by simulating edges with physical string properties as well as a general repelling force between nodes and a central attractive force. This configuration will update iteratively until a equilibrium constellation is found. 
 
-Inline-style: 
+Example: 
 ![alt text](https://github.com/Herr-Whit/SemMap/blob/master/ForceDirectedSemanticMap.png)
