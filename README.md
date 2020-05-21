@@ -5,3 +5,6 @@ The process has two major stages:
 1. ForceSem.py The python script does most of the natural language processing and creates a graph representation of the chat: The text will be parsed and "stop words", which do not carry meaning independently will be filtered out according to the dictionaries in the "forbidden" text files. For now there is support for English and German only. Then this information will be converted into network information using nodes and edges and finally exported in a JSON file.
 
 2. Visualize.py takes the graph representation and produces a 2d embedding by simulating edges with physical string properties as well as a general repelling force between nodes and a central attractive force. This configuration will update iteratively until a equilibrium constellation is found. 
+
+Inline-style: 
+![alt text](https://github.com/Herr-Whit/SemMap/blob/master/chatmap_candidate.svg)
